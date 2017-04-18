@@ -44,8 +44,8 @@ node[:letsencrypt][:domains].each do |domain|
       "--preferred-challenges #{node[:letsencrypt][:challenge_type]}",
     ]
     cmd << "-w #{node[:letsencrypt][:webroot_path]}" if node[:letsencrypt][:webroot_path]
-    cmd << "--pre-hook #{node[:letsencrypt][:pre_hook]}" if node[:letsencrypt][:pre_hook]
-    cmd << "--post-hook #{node[:letsencrypt][:post_hook]}" if node[:letsencrypt][:post_hook]
+    cmd << "--pre-hook \"#{node[:letsencrypt][:pre_hook]}\"" if node[:letsencrypt][:pre_hook]
+    cmd << "--post-hook \"#{node[:letsencrypt][:post_hook]}\"" if node[:letsencrypt][:post_hook]
     cmd << '--debug' if node[:letsencrypt][:debug_mode]
     command cmd.join(' ')
     not_if "test -d /etc/letsencrypt/live/#{domain}"
