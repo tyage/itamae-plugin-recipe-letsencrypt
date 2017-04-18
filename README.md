@@ -51,6 +51,8 @@ letsencrypt:
   authenticator: standalone # standalone, webroot
   webroot_path: /var/www/example
   debug_mode: false
+  pre_hook: "service nginx stop"
+  post_hook: "service nginx start"
 ```
 
 **Process of the port selected by `challenge_type` needs to be stopped**
