@@ -35,6 +35,9 @@ end
 node[:letsencrypt][:domains].each do |domain|
   execute "get #{domain} certificate" do
     cmd = [
+      # set LC_ALL, LC_CTYPE for this issue (for ubuntu 16.04) https://github.com/certbot/certbot/issues/2883
+      'export LC_ALL="en_US.UTF-8" &&',
+      'export LC_CTYPE="en_US.UTF-8" &&',
       node[:letsencrypt][:certbot_auto_path],
       'certonly',
       '--agree-tos',
